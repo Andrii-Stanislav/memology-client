@@ -3,10 +3,10 @@ import {configureStore} from '@reduxjs/toolkit'
 import {Context, createWrapper, HYDRATE} from 'next-redux-wrapper'
 import thunk, {ThunkDispatch} from 'redux-thunk'
 
-import base from './base'
+import user from './user'
 
 const rootReducer = combineReducers({
-    base,
+    user,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

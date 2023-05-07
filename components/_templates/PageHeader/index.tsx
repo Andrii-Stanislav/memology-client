@@ -1,18 +1,30 @@
-import Link from "next/link";
+import Link from 'next/link'
+
+import useAuth from '../../../pages/api/hooks/useAuth'
 
 export const PageHeader = () => {
-  return (
-    <header
-      style={{
-        display: "flex",
-        gap: "10px",
-        padding: "10px",
-        backgroundColor: "blue",
-      }}
-    >
-      <Link href="/">Home</Link>
-      <Link href="/users">Users</Link>
-      <Link href="/about">About</Link>
-    </header>
-  );
-};
+    const {signOut} = useAuth()
+
+    return (
+        <header
+            style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                gap: '10px',
+                padding: '10px',
+            }}
+        >
+            <div
+                style={{
+                    display: 'flex',
+                    gap: '10px',
+                }}
+            >
+                <Link href="/">Home</Link>
+            </div>
+            <button type="button" onClick={signOut}>
+                Log out
+            </button>
+        </header>
+    )
+}

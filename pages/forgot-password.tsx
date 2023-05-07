@@ -5,7 +5,6 @@ import {Button, TextField, Link, Box, Typography, Container} from '@mui/material
 export default function ForgotPassword() {
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        console.log(event.currentTarget)
     }
 
     return (

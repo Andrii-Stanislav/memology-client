@@ -1,25 +1,19 @@
 import {useEffect} from 'react'
 import {useRouter} from 'next/router'
-import {getServerSession} from 'next-auth/next'
-import {Session} from 'next-auth'
-import type {GetServerSideProps} from 'next'
 
-import {authOptions} from './api/auth/[...nextauth]'
+import useAuth from './api/hooks/useAuth'
 
-type Props = {
-    session: Session
-}
-
-export default function About({session}: Props) {
+export default function About() {
     const router = useRouter()
+    const {isAuth} = useAuth()
 
     useEffect(() => {
-        if (!session) {
+        if (!isAuth) {
             router.push('/login')
         }
-    }, [session])
+    }, [isAuth])
 
-    if (!session) {
+    if (!isAuth) {
         return null
     }
 
@@ -28,12 +22,4 @@ export default function About({session}: Props) {
             <h1>About</h1>
         </>
     )
-}
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    return {
-        props: {
-            session: await getServerSession(context.req, context.res, authOptions),
-        },
-    }
 }

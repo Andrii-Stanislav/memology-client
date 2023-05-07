@@ -1,6 +1,7 @@
-import {ReactNode, useEffect} from 'react'
-import {useSession} from 'next-auth/react'
+import {ReactNode} from 'react'
 import {useRouter} from 'next/router'
+
+import useAuth from '../../pages/api/hooks/useAuth'
 
 type Props = {
     children: ReactNode
@@ -8,11 +9,11 @@ type Props = {
 
 function AuthGuard({children}: Props) {
     const router = useRouter()
-    const {data: session} = useSession()
+    const {isAuth} = useAuth()
 
     if (typeof window === 'undefined') return null
 
-    if (!session) {
+    if (!isAuth) {
         router.push('/login')
     }
 
